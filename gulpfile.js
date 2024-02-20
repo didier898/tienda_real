@@ -49,6 +49,12 @@ function versionAvif() {
         .pipe(dest('build/img'));
 }
 
+// Mueve los archivos HTML a la carpeta de distribución
+function moveHTML() {
+    return src('src/**/*.html')
+        .pipe(dest('build'));
+}
+
 // Tarea de desarrollo
 function dev() {
     watch('src/scss/**/*.scss', css);
@@ -56,7 +62,7 @@ function dev() {
 }
 
 // Tarea de construcción
-const build = series(imagenes, versionWebp, versionAvif, css);
+const build = series(imagenes, versionWebp, versionAvif, css, moveHTML);
 
 // Exporta las tareas
 exports.build = build;
