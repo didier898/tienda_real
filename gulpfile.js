@@ -19,14 +19,14 @@ function css() {
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
         .pipe(sourcemaps.write('.'))
-        .pipe(dest('build/css'));
+        .pipe(dest('dist/css'));
 }
 
 // Optimización de imágenes
 function imagenes() {
     return src('src/img/**/*')
         .pipe(imagemin({ optimizationLevel: 3 }))
-        .pipe(dest('build/img'));
+        .pipe(dest('dist/img'));
 }
 
 // Conversión a formato WebP
@@ -36,7 +36,7 @@ function versionWebp() {
     };
     return src('src/img/**/*.{png,jpg}')
         .pipe(webp(opciones))
-        .pipe(dest('build/img'));
+        .pipe(dest('dist/img'));
 }
 
 // Conversión a formato AVIF
@@ -46,13 +46,13 @@ function versionAvif() {
     };
     return src('src/img/**/*.{png,jpg}')
         .pipe(avif(opciones))
-        .pipe(dest('build/img'));
+        .pipe(dest('dist/img'));
 }
 
 // Mueve los archivos HTML a la carpeta de distribución
 function moveHTML() {
     return src('src/**/*.html')
-        .pipe(dest('build'));
+        .pipe(dest('dist'));
 }
 
 // Tarea de desarrollo
